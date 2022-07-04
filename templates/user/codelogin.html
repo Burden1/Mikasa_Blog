@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    短信验证码登录
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    <link href="{% static 'css/register.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,
+    600,600i,700,700i,800,800i" rel="stylesheet"/>
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <div class="main">
+        <div class="main-w31">
+            <h1 class="logo-w3">个人博客用户登录</h1>
+            <div class="w3layouts-main">
+                <h2>
+                    <span><a href="{% url 'user:login' %}">密码登录</a></span>
+                    &nbsp;&nbsp;
+                    <span><a href="{% url 'user:codelogin' %}" style="color: #4bcfef">验证码登录</a></span>
+                </h2>
+                <p style="color: #ff0000">{{ msg }}{{ errors }}</p>
+                <form action="{% url 'user:codelogin' %}" method="post"> {% csrf_token %}
+                    <input placeholder="手机号码" name="mobile" type="text" id="mobile" required="">
+                    <input placeholder="输入验证码" name="code" type="text" required="">
+                    <button id="sendPhone" type="button"
+                            style="background: #dcdad8;font-size: larger;color: #070523">发送验证码
+                    </button>
+                    <br><br>
+                    <input type="submit" value="登录" name="login">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# js 部分#}
+{% block myjs %}
+    <script>
+        $(function () {
+            $('#sendPhone').click(function () {
+                    {# 拿到手机号 #}
+                    const mobile = $('#mobile').val();
+                    {# 如果手机号长度为11位，就调用发送手机号验证码接口 #}
+                    if (mobile.length == 11) {
+                        {# 发送ajax请求 #}
+                        $.getJSON('{% url 'user:send_code' %}', {mobile: mobile}, function (data) {
+                            {#console.log(data)#}
+                            if (data.status == 501) {
+                                flag = confirm(data.result + ',是否跳转注册页面进行注册？');
+                                if (flag) {
+                                    window.location.href = '{% url 'user:register' %}'
+                                }
+                            } else {
+                                alert(data.result)
+                            }
+                        })
+                    } else {
+                        alert("请输入正确的手机号码！")
+                    }
+                }
+            )
+        })
+    </script>
+{% endblock %}

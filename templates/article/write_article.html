@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    写博客
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    <style>
+        form > p {
+            padding-bottom: 50px;
+            padding-left: 200px;
+            font-size: 16px;
+        }
+
+        input {
+            height: 30px;
+            width: 100px;
+
+        }
+    </style>
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <h2 class="ctitle"><b>写博客</b> </h2>
+
+    <form action="{% url 'article:write_article' %}" method="post" enctype="multipart/form-data">
+        {{ csrf_token }}
+        {{ form.media }}
+        {{ form.as_p }}
+
+        <input type="submit" value="发表文章" >
+    </form>
+{% endblock %}
+
+{# js #}
+{% block myjs %}
+
+{% endblock %}

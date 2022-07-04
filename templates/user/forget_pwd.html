@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    忘记密码
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    <link href="{% static 'css/register.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,
+    600,600i,700,700i,800,800i" rel="stylesheet"/>
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <div class="main">
+        <div class="main-w31">
+            <h1 class="logo-w3">忘记密码</h1>
+            <div class="w3layouts-main">
+                <p style="color: #d01b1b">{{ msg }}{{ errors }}</p>
+                <form action="{% url 'user:forget_pwd' %}" method="post"> {% csrf_token %}
+                    <input placeholder="请输入邮箱地址" name="email" type="email" required="">
+                    {# 图片验证码 #}
+                    {{ form.captcha }}
+                    <br><br>
+                    <input type="submit" value="找回密码" name="login">
+                </form>
+                <br><br>
+                <a href="{% url 'user:login' %}"><span>已有账号，去登录</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'user:register' %}"><span>注册新用户?</span></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# js 部分#}
+{% block myjs %}
+    <script>
+        $(function () {
+            {# 可以直接去浏览器上面查找元素定位 #}
+            // 1、当我们点击这个图片验证码时，我们就发送ajax请求同步刷新验证码
+            $('.captcha').click(function () {
+                var img = $(this);
+                // 发送ajax请求，去刷新验证码
+                $.getJSON('/captcha/refresh', function (data) {
+                    console.log(data)
+                    img.attr('src', data['image_url'])
+                    $('#id_captcha_0').val(data['key'])
+                })
+            });
+            // 2、校验验证码是否正确
+            $('#id_captcha_1').blur(function () {
+                const $this = $(this);
+                // 拿到图片验证码的value值（即对应captcha表里面的hashkey）
+                const key = $('#id_captcha_0').val();
+                // 拿到页面验证码输入框输入的值
+                const code = $(this).val();
+                // 发送ajax请求，校验验证码
+                $.getJSON('{% url 'user:valid_code' %}', {key: key, code: code}, function (data) {
+                    console.log(data)
+                    $('#result').remove();
+                    if (data.status == 1) {
+                        $this.after('<span id="result">验证码正确</span>')
+                    } else {
+                        $this.after('<span id="result" style="color: #d01b1b">验证码错误，请重新输入</span>')
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

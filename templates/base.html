@@ -1,0 +1,83 @@
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+        Mikasa个人博客
+    {% endblock %}</title>
+    <meta name="keywords" content="个人博客,Mikasa个人博客,个人博客模板,Mikasa"/>
+    <meta name="description" content="Mikasa个人博客"/>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <![endif]-->
+    <script src="{% static 'js/scrollReveal.js' %}"></script>
+    {# 如果要使用jquery的话，记得把jquery引用加上，可以 直接去百度 一下搜索一个版本直接复制粘贴#}
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    {% block mycss %}
+
+    {% endblock %}
+</head>
+<body>
+
+<header>
+    <br><br>
+    <div style="text-align: right">
+        {# 如果session里面有值的话就显示：欢迎！用户名，如果没有值的话就显示：登录/注册   #}
+        {% if  request.session.username %}
+            {#     1、点击欢迎的这个用户名称，咱们要链接到个人中心页       #}
+            欢迎！<a href="{% url 'user:user_center1' %}">{{ request.session.username }}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'user:logout' %}">注销登录</a>
+        {% else %}
+            <a href="{% url 'user:login' %}">登录</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'user:register' %}">注册</a>
+        {% endif %}
+    </div>
+
+    <div class="logo" style="text-align: left" data-scroll-reveal="enter right over 1s">
+        <a href="/"><img src="{% static 'images/logo2.png' %}"></a>
+    </div>
+
+    <nav class="topnav" data-scroll-reveal="enter bottom over 1s after 1s"><a
+            href="{% url 'index' %}"><span>首页</span><span
+                    {#    把关于我路径配置上        #}
+            class="en">Home</span></a>
+
+        <a href="{% url 'article:slow_life' %}"><span>慢生活</span><span class="en">Life</span></a>
+        <a href="{% url 'article:show' %}?page=1&tid="><span>学无止境</span><span class="en">Learn</span></a>
+        <a href="{% url 'article:write_article' %}"><span>写博客</span><span class="en">Write</span></a>
+        <a href="{% url 'user:leave_message' %}"><span>留言</span><span class="en">Saying</span></a>
+        <a href="{% url 'user:about' %}"><span>关于我</span><span class="en">About</span></a>
+        {#     2、点击个人资料菜单也链接到个人中心页       #}
+        <a href="{% url 'user:user_center1' %}"><span>个人资料</span><span class="en">Personal</span></a>
+    </nav>
+</header>
+
+<article>
+    <div class="container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</article>
+
+<footer>
+    Design by DanceSmile <a href="/">粤ICP备11002373号-1</a>
+</footer>
+
+<script>
+    if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+        (function () {
+            window.scrollReveal = new scrollReveal({reset: true});
+        })();
+    }
+    ;
+</script>
+{# js #}
+{% block myjs %}
+
+{% endblock %}
+
+</body>
+</html>

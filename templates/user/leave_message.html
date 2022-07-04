@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{#  title部分 #}
+{% block title %}
+    Mikasa个人博客 - 一个热爱敲代码的女程序媛的个人博客网站
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    <link href="{% static 'css/book.css' %}" rel="stylesheet">
+    <link href="{% static 'css/leavemsg.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <div class="container">
+        <h2 class="ctitle"><b>留言板</b> <span>你，生命中最重要的过客，之所以是过客，因为你未曾为我停留。</span></h2>
+        {#   留言板     #}
+        <div class="gbook">
+            <div class="about">
+                {#  加载条   #}
+                <div id="fountainG">
+                    <li> </li>
+                    <li> </li>
+                    <li> </li>
+                    <li> </li>
+                    <li> </li>
+                    <li> </li>
+                    <li></li>
+                    <li></li>
+                </div>
+                {#  女孩   #}
+                <div class="about_girl">
+                    <span><a href="/"><img src="{% static 'images/girl.jpg' %}"></a></span>
+                    <p>你为什么不值得？你永远值得</p>
+                </div>
+                <br><br>
+
+                {#  留言展示部分   #}
+                <div class="news_pl">
+                    <h2>留言板</h2>
+                    <ul>
+                        {% for leave_msg in leave_msgs %}
+                            {#    遍历拿到所有留言            #}
+                            <li>
+                                <p>
+                                    <span>{{ leave_msg.nickname }}</span>
+                                    <span>{{ leave_msg.create_time }}</span>
+                                </p>
+                                <p>{{ leave_msg.content }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                </div>
+
+                {# 发表留言部分 #}
+                <div class='plpost'>
+                    <h2>留言</h2>
+                    <p>
+                        <input type="text" name="uname" id="uname" placeholder="请输入用户昵称"
+                               style="height: 30px;" required>
+                    </p>
+                    <p>
+                            <textarea name="saytext" id="saytext" cols="70" rows="8"
+                                      required placeholder="来说句话吧~"></textarea>
+                    </p>
+                    <p><input type="submit" value="留言" id="btncomment" style="height: 30px;width: 80px;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# js部分 #}
+{% block myjs %}
+    <script>
+        $(function () {
+            // 1、得到按钮对象
+            $('#btncomment').click(function () {
+                // 2、从文本框中取值
+                var nickname = $('#uname').val();
+                var saytext = $('#saytext').val();
+                // 3、发送请求
+                $.getJSON('{% url 'user:add_leave_msg' %}', {
+                    nickname: nickname,
+                    saytext: saytext,
+                }, function (data) {
+                    console.log(data)
+                    if (data.status == 1) {
+                        window.location.href = '{% url 'user:leave_message' %}'
+                    }
+                })
+            });
+        });
+    </script>
+{% endblock %}
+
+
+

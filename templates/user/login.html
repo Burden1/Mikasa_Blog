@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    用户登录
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    <link href="{% static 'css/register.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,
+    600,600i,700,700i,800,800i" rel="stylesheet"/>
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <div class="main">
+        <div class="main-w31">
+            <h1 class="logo-w3">个人博客用户登录</h1>
+            <div class="w3layouts-main">
+                <h2>
+                    <span><a href="{% url 'user:login' %}" style="color: #4bcfef">密码登录</a></span>
+                    &nbsp;&nbsp;
+                    <span><a href="{% url 'user:codelogin' %}">验证码登录</a></span>
+                </h2>
+                <p style="color: #ff0000">{{ msg }}{{ errors }}</p>
+                <form action="{% url 'user:login' %}" method="post"> {% csrf_token %}
+                    <input placeholder="用户名" name="username" type="text" required="">
+                    <input placeholder="密码" name="password" type="password" id="password1" required="">
+                    <input type="submit" value="登录" name="login">
+                </form>
+                <br><br>
+                <a href="{% url 'user:forget_pwd' %}"><span>忘记密码?</span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'user:register' %}"><span>注册新用户</span></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

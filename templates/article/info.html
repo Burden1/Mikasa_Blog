@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    博客详情
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    {# 引进样式info.css ，m.css   #}
+    <link href="{% static 'css/info.css' %}" rel="stylesheet">
+    <link href="{% static 'css/m.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <div class="infos">
+        <div class="newsview">
+            {#  内嵌title  #}
+            <h2 class="intitle">您现在的位置是：<a href="{% url 'index' %}">网站首页</a> > <a
+                    href="{% url 'article:detail' %}?id={{ current_article.id }}">文章详情</a></h2>
+            <h3 class="news_title">{{ current_article.title }}</h3>
+            {#  作者  #}
+            <div class="news_author">
+                <span class="au01">{{ current_article.user.username }}</span>
+                <span class="au02">{{ current_article.date }}</span>
+                <span class="au03">共<b>{{ current_article.click_num }}</b>人围观</span>
+            </div>
+            {#  标签  #}
+            <div class="tags">
+                {#  遍历拿到文章所有的标签  #}
+                {% for tag in current_article.tags.all %}
+                    <a href="/">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+            {#  简介  #}
+            <div class="news_about">
+                <strong style="font-size: large; font-weight: bold">简介：</strong>{{ current_article.description }}
+            </div>
+            {#  文章详情  #}
+            <div class="news_infos">
+                {#  注意，如果xadmin后台文章内容里面添加的p标签，那内容引用这里要加上safe进行过滤，否则就会把p标签直接显示在页面上#}
+                {{ current_article.content |safe }}
+                <p>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    {# 上一篇/下一篇 #}
+    <div class="nextinfo">
+        {#    之前我们是直接前端传参+1，-1，bug已修复 #}
+        <p>上一篇：<a href="{% url 'article:detail' %}?id={{ previous_article.id }}">{{ previous_article.title }}</a>
+        </p>
+        <p>下一篇：<a href="{% url 'article:detail' %}?id={{ next_article.id }}">{{ next_article.title }}</a></p>
+    </div>
+
+    {# 相关文章 #}
+    <div class="otherlink">
+        <h2>相关文章</h2>
+        <ul class="otherlink_ul">
+            {% for about_article in about_article_list %}
+                <li><a href="{% url 'article:detail' %}?id={{ about_article.id }}">{{ about_article.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {# 文章评论部分   #}
+    <div class="news_pl">
+        <h2>文章评论</h2>
+        <ul>
+            {% for comment in comments %}
+                {#    遍历拿到文章的所有评论            #}
+                <li>
+                    <p>
+                        <span>{{ comment.nickname }}</span>
+                        <span>{{ comment.create_time }}</span>
+                    </p>
+                    <p>{{ comment.content }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {# 发表评论 #}
+        <div class='plpost'>
+            <p>
+                <span>来说句话吧....</span>
+            </p>
+
+            <p>
+                <input type="text" name="uname" id="uname" placeholder="请输入用户昵称" style="height: 30px;margin-bottom: 15px;">
+                <br>
+            <p>
+                <textarea name="saytext" id="saytext" cols="80" rows="10" style="margin-bottom: 15px;"></textarea>
+            </p>
+            <p><input type="submit" value="发表评论" id="btncomment" style="height: 30px;width: 80px;"></p>
+        </div>
+    </div>
+{% endblock %}
+
+{# js 部分 #}
+{% block myjs %}
+    <script>
+        $(function () {
+            // 1、得到按钮对象
+            $('#btncomment').click(function () {
+                // 2、从文本框中取值
+                var nickname = $('#uname').val();
+                var saytext = $('#saytext').val();
+                // 3、发送请求
+                $.getJSON('{% url 'article:comment' %}', {
+                    nickname: nickname,
+                    saytext: saytext,
+                    aid: '{{current_article.id}}'
+                }, function (data) {
+                    console.log(data)
+                    if (data.status == 1) {
+                        window.location.href = '{% url 'article:detail' %}?id={{ current_article.id }}'
+                    }
+                })
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    学无止境
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    <link href="{% static 'css/learn.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,
+    600,600i,700,700i,800,800i" rel="stylesheet"/>
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <h2 class="ctitle"><b>学无止境</b> <span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。</span></h2>
+
+    {#  标签部分   #}
+    <div class="rnav">
+        <ul>
+            {% for tag in tags %}
+                {#     遍历拿到单个标签，然后传递标签id，并跳转到具体列表页面           #}
+                <li><a href="{% url 'article:show' %}?tid={{ tag.id }}&page=">{{ tag.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {#  时间轴部分   #}
+    <ul class="cbp_tmtimeline">
+        {% for article in page.object_list %}
+            {#     遍历拿到每篇文章       #}
+            <li>
+                <time class="cbp_tmtime">
+                    <span>{{ article.date|date:'m-d' }}</span>
+                    <span>{{ article.date|date:'Y' }}</span>
+                </time>
+
+                <div class="cbp_tmicon"></div>
+
+                <div class="cbp_tmlabel" data-scroll-reveal="enter right over 1s">
+                    <h2>{{ article.title }}</h2>
+                    <p>
+                        <span class="blogpic">
+                            <a href="{% url 'article:detail' %}?id={{ article.id }}"><img
+                                    src="{{ MEDIA_URL }}{{ article.image }}"></a>
+                        </span>
+                        {{ article.description }}
+                    </p>
+                    <a href="{% url 'article:detail' %}?id={{ article.id }}" target="_blank" class="readmore">阅读全文&gt;&gt;</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {#  分页部分   #}
+    <div class="page">
+        {#  1、点击 << 图标默认跳转到第一页  #}
+        <a href="{% url 'article:show' %}?page=1&tid=">&lt;&lt;</a>
+
+        {#  2、拿到当前页面，判断如果当前页有上一页，则传递上一页的页码，否则默认为第一页    #}
+        <a href="{% url 'article:show' %}?page=
+            {% if page.has_previous %}
+                {{ page.previous_page_number }}&tid=
+            {% else %}1&tid=
+            {% endif %}">&lt;
+        </a>
+
+        {#   3、遍历页面范围，拿到具体的页码       #}
+        {% for page_number in page.paginator.page_range %}
+            {% if page.number == page_number %}
+                <b>{{ page_number }}</b>
+            {% else %}
+                <a href="{% url 'article:show' %}?page={{ page_number }}&tid={{ tid }}">{{ page_number }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {#    4、拿到当前页面，判断如果当前页有下一页，则传递下一页的页码，否则默认为最后一页    #}
+        <a href="{% url 'article:show' %}?page=
+            {% if page.has_next %}
+                {{ page.next_page_number }}&tid=
+            {% else %}
+                {{ page.number }}&tid=
+            {% endif %}">&gt;
+        </a>
+        {#    5、点击 >> 图标默认跳转到最后一页  #}
+        <a href="{% url 'article:show' %}?page={{ page.paginator.num_pages }}&tid=">&gt;&gt;</a>
+        {#    6、共 n 页    #}
+        &nbsp;&nbsp;&nbsp;&nbsp;共&nbsp;&nbsp;{{ page.paginator.num_pages }}&nbsp;&nbsp;页
+    </div>
+{% endblock %}
+
+{# js #}
+{% block myjs %}
+
+{% endblock %}

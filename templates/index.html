@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    {# 首页顶部博客   #}
+    <div class="blog" data-scroll-reveal="enter top">
+        {# 遍历拿到每一个blog #}
+        {% for figure_article in figure_articles %}
+            <figure>
+                <ul>
+                    <a href="{% url 'article:detail' %}?id={{ figure_article.id }}">
+                        <img src="{{ MEDIA_URL }}{{ figure_article.image }}">
+                        <span>查看详情</span>
+                    </a>
+                </ul>
+                <p>
+                    <a href="{% url 'article:detail' %}?id={{ figure_article.id }}">{{ figure_article.title }}</a>
+                </p>
+                <figcaption>
+                    {{ figure_article.description }}
+                </figcaption>
+            </figure>
+        {% endfor %}
+    </div>
+    {#  时间轴   #}
+    <div>
+        <ul class="cbp_tmtimeline">
+            {% for darticle in darticles %}
+                <li>
+                    <time class="cbp_tmtime">
+                        <span>{{ darticle.date | date:'m-d' }}</span>
+                        <span>{{ darticle.date | date:'Y' }}</span>
+                    </time>
+                    <div class="cbp_tmicon"></div>
+                    <div class="cbp_tmlabel" data-scroll-reveal="enter right over 1s">
+                        <h2>{{ darticle.title }}</h2>
+                        <p>
+                        <span class="blogpic">
+                            <a href="{{ MEDIA_URL }}{{ darticle.image }}"><img
+                                    src="{{ MEDIA_URL }}{{ darticle.image }}"></a>
+                        </span>
+                            {{ darticle.description }}
+                        </p>
+                        <a href="{% url 'article:detail' %}?id={{ darticle.id }}" target="_blank" class="readmore">阅读全文&gt;&gt;</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

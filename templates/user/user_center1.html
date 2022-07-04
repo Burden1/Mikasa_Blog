@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    用户注册
+{% endblock %}
+{# css样式部分 #}
+{% block mycss %}
+    <link href="{% static 'css/register.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet"/>
+    <style>
+        {# 定义一下头像的样式       #}
+        #icon {
+            width: 80px;
+            height: 80px;
+            border: #4bcfef;
+            border-radius: 40px;
+            margin: auto;
+        }
+
+        #choose_file {
+            height: 30px;
+        }
+    </style>
+
+{% endblock %}
+{# 内容部分 #}
+{% block content %}
+    <div class="main">
+        <div class="main-w31">
+            <h1 class="logo-w3">用户中心</h1>
+            <div class="w3layouts-main">
+                <h2><span>个人信息</span></h2>
+                <p>{{ msg }}{{ errors }}</p>
+                {#      注意：只要表单里面用到file类型，就必须定义enctype属性          #}
+                <form action="{% url 'user:user_center1' %}" method="post"
+                      enctype="multipart/form-data"> {% csrf_token %}
+                    <img src="{{ user.yunicon }}" alt="" id="icon"><br>
+                    <input type="file" name="icon" id="choose_file" >
+                    <br><br>
+                    <input placeholder="用户名" name="username" value="{{ user.username }}" type="text" required=""><br>
+                    <input placeholder="邮箱" name="email" type="email" value="{{ user.email }}" required=""><br>
+                    <input placeholder="手机号码" name="mobile" type="text" value="{{ user.mobile }}" required=""><br>
+
+                    <input type="submit" value="更新信息" name="update"><br>
+                </form>
+                <br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# js部分 #}
+{% block myjs %}
+{% endblock %}

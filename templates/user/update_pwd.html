@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    更新密码
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    <link href="{% static 'css/register.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="//fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,
+    600,600i,700,700i,800,800i" rel="stylesheet"/>
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <div class="main">
+        <div class="main-w31">
+            <h1 class="logo-w3">更新密码</h1>
+            <div class="w3layouts-main">
+                <p style="color: #ffffff">{{ msg }}{{ errors }}</p>
+                <form action="{% url 'user:update_pwd' %}" method="post"> {% csrf_token %}
+                    {#    拿到返回的唯一标识码，即意味着你要更新密码的用户是哪个   #}
+                    <input type="hidden" value="{{ c }}" name="code">
+                    <input placeholder="请输入新密码" name="password" type="password" required="">
+                    <input placeholder="请再次确认密码" name="repassword" type="password" required="">
+                    <input type="submit" value="更新密码">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

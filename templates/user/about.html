@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{#  title部分 #}
+{% block title %}
+    Mikasa个人博客 - 一个热爱敲代码的女程序媛的个人博客网站
+{% endblock %}
+
+{# css样式部分 #}
+{% block mycss %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/about.css' %}" rel="stylesheet">
+{% endblock %}
+
+{# 内容部分 #}
+{% block content %}
+    <div class="container">
+        <div class="banner">
+            <p data-scroll-reveal="enter top over 2s">对某些事我不再有耐性，不是因为我变得骄傲</p>
+            <p data-scroll-reveal="enter left over 2s after 1s">只是我的生命到了一个阶段，我不想再浪费时间在一些让我感到不开心的事情上</p>
+            <p data-scroll-reveal="enter bottom over 2s after 2s">我不愿去取悦不喜欢我的人，我的爱只自私的留给我爱的人和爱我的人</p>
+        </div>
+        <div class="memorial_day">
+            <div class="time_axis"></div>
+            <ul>
+                <li class="n1"><a href="/">C++入门</a>
+                    <div class="dateview">2018</div>
+                </li>
+                <li class="n2"><a href="/">自学Java</a>
+                    <div class="dateview">2019-2020</div>
+                </li>
+                <li class="n3"><a href="/">转战测试</a>
+                    <div class="dateview">2020-2021</div>
+                </li>
+                <li class="n4"><a href="/">转战自动化</a>
+                    <div class="dateview">2021-至今</div>
+                </li>
+                <li class="n5"><a href="/">技术博主一枚</a>
+                    <div class="dateview">2022</div>
+                </li>
+            </ul>
+        </div>
+        <div class="about left">
+            <h2>Just about me</h2>
+            <ul>
+                <p>
+                    Mikasa，女，简单记录分享
+                </p>
+            </ul>
+            <h2>About my blog</h2>
+            <p>CSDN博客：<a href="https://blog.csdn.net/Makasa" target="_blank" class="blog_link">https://blog.csdn.net/Makasa</a>
+            </p>
+        </div>
+    </div>
+    </aside>
+{% endblock %}
+
+{# js #}
+{% block myjs %}
+
+{% endblock %}
+
+

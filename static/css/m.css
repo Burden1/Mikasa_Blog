@@ -1,0 +1,82 @@
+@media only screen and(max-width: 479px) {
+    header, article, footer {
+        width: 100%;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    nav, .blog, .search {
+        display: none;
+    }
+
+    article {
+        padding: 20px 0 0 0;
+    }
+
+    #mnav {
+        display: block;
+        z-index: 99999;
+        background: url("../images/logo2.png") no-repeat left;
+    }
+}
+
+.banner {
+    margin: 40px 0 10px 0;
+}
+
+.newslogs {
+    width: 100%;
+}
+
+h3.blogtitle {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.bloginfo p, .paihang ul li p {
+    text-align: justify;
+}
+
+.blogpic img {
+    height: 100%;
+    width: auto;
+}
+
+.litle {
+    display: none;
+}
+
+.rightbox {
+    margin-right: 0;
+}
+
+.navtab {
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.navlist li {
+    margin: 0 5px 5px;
+}
+
+.effect {
+    width: 43%;
+}
+
+.mbpic {
+    padding: 5px;
+    margin: 0 5px 5px;
+}
+
+.mbimg {
+    height: 150px;
+}
+
+.pagelist {
+    margin: 0 0 15px 0;
+}
+
+.link_box {
+    margin-top: 30px;
+}

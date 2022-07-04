@@ -1,0 +1,273 @@
+@charset "gb2312";
+.infos {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.newsview {
+    padding: 20px;
+}
+
+.intitle {
+    line-height: 40px;
+    height: 40px;
+    font-size: 14px;
+    border-bottom: #000 2px;
+}
+
+.intitle a {
+    font-weight: normal;
+}
+
+.news_title {
+    font-size: 24px;
+    font-weight: normal;
+    padding: 20px 0;
+    color: #f5fafd;
+    padding-left: 20px;
+}
+
+.news_author {
+    width: 100%;
+    color: #f5fafd;
+    line-height: 20px;
+    padding-left: 15px;
+
+}
+
+.news_author span {
+    margin-right: 8px;
+    padding-left: 8px;
+}
+
+.au01 {
+    /*background: url("../images/author2.png") no-repeat left center;*/
+    padding-left: 20px;
+
+}
+
+.au02 {
+    /*background: url("../images/date.png") no-repeat left center;*/
+}
+
+.au03 b {
+    color: #ffffff;
+    padding: 0 5px;
+}
+
+.au04 {
+    font-weight: normal;
+}
+
+/*简介部分*/
+.news_about {
+    color: #F6F6F6;
+    border: 1px solid #f3f3f3;
+    padding: 10px;
+    margin: 20px;
+}
+
+.news_about strong {
+    color: #38485A;
+    font-weight: 400;
+!important;
+    font-size: 16px;
+}
+
+.news_content {
+    line-height: 24px;
+    font-size: 14px;
+}
+
+.news_content p {
+    overflow: hidden;
+    padding-bottom: 4px;
+    padding-top: 6px;
+    word-wrap: normal;
+}
+
+/*标签部分*/
+.tags a {
+    background: #F4650E;
+    padding: 3px 8px;
+    margin: 0 10px 0 0;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+.tags {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+/*文章内容部分*/
+.news_infos {
+    line-height: 24px;
+    text-align: justify;
+    padding-left: 20px;
+}
+
+.news_infos p {
+    margin-bottom: 10px;
+}
+
+.news_infos img {
+    max-width: 650px;
+}
+
+.share {
+    padding: 20px;
+}
+
+/*下一篇部分*/
+.nextinfo {
+    line-height: 24px;
+    width: 100%;
+    background: rgba(201, 196, 196, 0.56);
+    overflow: hidden;
+}
+
+.nextinfo p {
+    padding: 4px 10px;
+    border-radius: 5px;
+    color: rgba(97, 97, 93, 0.89);
+    font-weight: bold;
+}
+
+.nextinfo a {
+    color: rgba(59, 48, 48, 0.8);
+}
+
+.nextinfo a:hover {
+    text-decoration: underline;
+}
+
+
+/* 相关文章部分*/
+.otherlink, .xzsm, .ffsm {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.57);
+    overflow: hidden;
+}
+
+.otherlink h2 {
+    border-bottom: #000 2px solid;
+    line-height: 40px;
+    font-size: 18px;
+    /*background: url("../images/5794.png") left 10px center no-repeat;*/
+    padding-left: 30px;
+    color: #000000;
+}
+
+.otherlink ul {
+    margin: 10px 0;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+.otherlink li {
+    line-height: 24px;
+    height: 24px;
+    display: block;
+    width: 40%;
+    float: left;
+    overflow: hidden;
+    padding-left: 10px;
+    /*background: url("../images/navline.jpg") no-repeat left center;*/
+}
+
+.otherlink li a {
+    color: rgba(59, 48, 48, 0.8);
+}
+
+.otherlink li a:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+/* 评论部分*/
+.news_pl {
+    width: 100%;
+    background: rgba(248, 248, 248, 0.77);
+    overflow: hidden;
+    line-height: 40px;
+    font-size: 15px;
+    color: #000000;
+}
+
+.news_pl h2 {
+    border-bottom: #000 2px solid;
+    line-height: 40px;
+    font-size: 18px;
+    padding-left: 30px;
+    color: #000000;
+}
+
+/* 添加评论css样式*/
+.plpost {
+    margin: 10px 20px;
+
+}
+
+.plpost > p:first-child {
+    height: 30px;
+    line-height: 30px;
+    color: #686868;
+}
+
+.plpost > p > span:first-child {
+    float: left;
+    font-size: 18px;
+    color: darkgray;
+}
+
+
+/* 添加写博客css样式 */
+.news_pl ul li {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid darkgray;
+    color: #686868;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.news_pl ul li p:first-child {
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 15px;
+}
+
+.news_pl ul li p span:first-child {
+    /*float: left;*/
+    font-weight: bold;
+
+}
+
+.news_pl ul li p span:last-child {
+    height: 15px;
+    float: right;
+}
+
+
+.xzsm ul, .ffsm ul {
+    padding: 20px;
+    line-height: 24px;
+    border-top: 6px solid #a6b5c5;
+}
+
+.bt-blue {
+    display: block;
+    line-height: 40px;
+    height: 40px;
+    background: #1e8ec5;
+    width: 100px;
+    text-decoration: underline;
+}
+
+.bt-blue a {
+    color: #ffffff;
+}

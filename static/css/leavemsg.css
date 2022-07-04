@@ -1,0 +1,81 @@
+/* 留言板css样式*/
+.news_pl {
+    width: 100%;
+    /*background: rgba(248, 248, 248, 0.77);*/
+    /*overflow: hidden;*/
+    line-height: 40px;
+    font-size: 15px;
+    color: #000000;
+}
+
+/*.news_pl ul {*/
+/*    border-bottom: #000 2px solid;*/
+/*}*/
+
+.news_pl li{
+    border-bottom: #000 1px solid;
+}
+
+.news_pl h2 {
+    border-bottom: #000 2px solid;
+    line-height: 40px;
+    font-size: 18px;
+    padding-left: 30px;
+    color: #000000;
+}
+
+.news_pl p {
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.news_pl span {
+    font-size: 18px;
+}
+
+.news_pl span:last-child {
+    float: right;
+    /*padding-left: 350px;*/
+    padding-right: 200px;
+}
+
+/* 添加留言css样式*/
+.plpost {
+    width: 100%;
+    background: rgba(248, 248, 248, 0.77);
+    overflow: hidden;
+    line-height: 40px;
+    font-size: 15px;
+    color: #000000;
+}
+
+.plpost span {
+    padding-left: 8px;
+}
+
+.plpost h2 {
+    border-bottom: #000 2px solid;
+    line-height: 40px;
+    font-size: 18px;
+    padding-left: 20px;
+    color: #000000;
+}
+
+.plpost p {
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.plpost > p:first-child {
+    height: 30px;
+    line-height: 30px;
+    color: #686868;
+}
+
+.plpost > p > span:first-child {
+    float: left;
+    font-size: 25px;
+    color: darkgray;
+}

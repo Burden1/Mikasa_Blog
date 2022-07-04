@@ -1,0 +1,15 @@
+Django==2.0.13
+django_ckeditor==5.7.0
+django_crispy_forms==1.14.0
+django_formtools==2.3
+django_recaptcha==3.0.0
+django_reversion==5.0.1
+future==0.17.1
+httplib2==0.14.0
+PyMySQL==0.8.1
+qiniu==7.8.0
+requests==2.20.1
+six==1.11.0
+xlsxwriter==3.0.3
+xlwt==1.3.0
+~jango==2.1
